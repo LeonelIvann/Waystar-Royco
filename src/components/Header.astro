@@ -1,45 +1,102 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var header = document.querySelector(".header");
+        var hrHeader = document.querySelector(".header-hr");
+        var headerLogo = document.querySelectorAll(".header-logo");
+        var txtH = document.querySelectorAll(".txt-h");
+
+        hrHeader.style.width = "160px";
+
+        setTimeout(function () {
+            for (var i = 0; i < headerLogo.length; i++) {
+                headerLogo[i].style.opacity = "1";
+            }
+
+            for (var j = 0; j < txtH.length; j++) {
+                txtH[j].style.opacity = "1";
+            }
+
+            setTimeout(function () {
+                for (var i = 0; i < headerLogo.length; i++) {
+                    headerLogo[i].style.transition = "opacity 1s";
+                    headerLogo[i].style.opacity = "0";
+                }
+
+                for (var j = 0; j < txtH.length; j++) {
+                    txtH[j].style.transition = "opacity 1s";
+                    txtH[j].style.opacity = "0";
+                }
+
+                setTimeout(function () {
+                    hrHeader.style.transition = "width 1s";
+                    hrHeader.style.width = "0";
+
+                    setTimeout(function () {
+                        header.style.display = "none";
+                    }, 1500);
+                }, 1000); // Fade-out después de 1 segundo (1000 milisegundos)
+            }, 10000); // Espera 10 segundos (10000 milisegundos) antes de iniciar el fade-out
+        }, 4800); // Espera 4.8 segundos (4800 milisegundos) antes de aplicar el fade-in
+    });
+</script>
 <header class="header">
-    <img
-        src="../../public/logo.jpg"
-        alt="Waystar Royco"
-        class="header-logo"
-    />
+    <img src="../../public/logo.jpg" alt="Waystar Royco" class="header-logo" />
 
-    <h2>We are the future</h2>
-    <hr class="header-hr">
-    <p>ATN NCN LNN</p>
+    <div class="text-header">
+        <h2 class="txt-h">Building the future</h2>
+        <hr class="header-hr" />
+        <p class="txt-h">ATN NCN LNN</p>
+    </div>
 </header>
-
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lexend+Peta&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Lexend+Peta&display=swap");
 
     .header {
-        position: sticky;
-        background-color: rgb(255, 255, 255);
-        height: 10em;
+        /* position: fixed; */
+        height: 100vh;
         width: 100vw;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
-        font-family: 'Lexend Peta', sans-serif;
+        justify-content: center;
+        color: white;
+        animation: fade-out 5s linear forwards;
+        /* background-color: black; */
     }
-    .header h2{
-        font-size: 1rem;
+    .text-header {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .header h2 {
+        font-size: 1.2rem;
         font-weight: 100;
         margin-bottom: 0px;
     }
-    .header-hr{
-        width: 100px;
+    .header-hr {
+        width: 0;
         height: 1px;
-        margin: -20px;
-        background-color: black;
+        background-color: white;
         border: none;
+        transition: width 5s ease-in-out;
     }
-    .header p{
+    .header p {
         margin: 0px;
     }
     .header-logo {
-        width: 180px;
+        width: 95vw;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .header-logo,
+    .txt-h {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+    @media screen and (min-width: 628px) {
+        .header-logo {
+            width: 680px !important;
+            padding: 0px;
+        }
     }
 </style>
